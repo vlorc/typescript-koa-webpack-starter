@@ -1,6 +1,6 @@
-# Typescript-node-webpack-starter
+# Typescript-koa-webpack-starter
 
-Typescript nodejs minimum project
+Typescript koa minimum project
 
 # Features
 + compress
