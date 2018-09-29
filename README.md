@@ -3,6 +3,27 @@
 Typescript koa minimum project
 
 # Features
-+ compress
-+ merge
-+ debug
++ Compress
++ Merge
++ Debug
++ Hot Reload
+
+### Quick Start
+
+* run
+
+```shell
+npm start
+```
+
+* develop
+
+```shell
+npm run dev
+```
+
+* build
+
+```shell
+npm run build
+```

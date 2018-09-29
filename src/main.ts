@@ -1,18 +1,16 @@
-import * as Koa from 'koa';
-import * as Router from 'koa-router';
-import * as Logger from 'koa-logger';
+import * as http from 'http';
+import app from './app';
 
-const port = +process.env.PORT || 3000;
-const app = new Koa();
-const router = new Router();
+let currentApp = app.callback();
+const server = http.createServer(currentApp);
+server.listen(+process.env.PORT || 8080);
 
-router.get('/*', async (ctx) => {
-    ctx.body = 'Hello World!';
-});
-
-app.use(router.routes());
-app.use(Logger());
-
-app.listen(port, () => {
-    console.log(`Server running on port ${port}`);
-})
+if (module.hot) {
+	module.hot.accept('./app', () => {
+		server.removeListener('request', currentApp);
+		import("./app").then(next => {
+			currentApp = (next as any).default.callback();
+			server.on('request', currentApp);
+		});
+	});
+}

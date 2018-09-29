@@ -1,8 +1,9 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
+    "module": "esnext",
     "declaration": false,
     "noImplicitAny": false,
+    "moduleResolution": "node",
     "removeComments": true,
     "noLib": false,
     "emitDecoratorMetadata": true,
@@ -15,7 +16,9 @@
       "node",
       "koa",
       "koa-router",
-      "koa-logger"
+      "koa-logger",
+      "koa-bodyparser",
+      "webpack-env"
     ]
   },
   "include": [

@@ -5,6 +5,8 @@ const webpack = require('webpack');
 
 const BabiliWebpackPlugin = require('babili-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const NodeExternals = require('webpack-node-externals');
+const StartServerPlugin = require('start-server-webpack-plugin');
 
 let config = {
     entry: {
@@ -44,9 +46,10 @@ let config = {
         new webpack.NoEmitOnErrorsPlugin(),
     ],
     resolve: {
-        extensions: ['.ts', '.js', '.json', '.node']
+        extensions: ['.ts', '.js', '.json', '.node'],
     },
     target: 'node',
+    externals: [],
 }
 
 module.exports = function(env, argv) {
@@ -73,7 +76,18 @@ module.exports = function(env, argv) {
                 entryOnly: false,
                 banner: 'require("source-map-support").install();',
             }),
+            new webpack.HotModuleReplacementPlugin(),
+            new webpack.NamedModulesPlugin(),
+            new StartServerPlugin({
+                name: 'main.js',
+                once: true,
+                nodeArgs: ['--inspect']
+            }),
         );
+        config.externals.push(new NodeExternals({
+            whitelist: ['webpack/hot/poll?1000'],
+        }));
+        config.entry = ["webpack/hot/poll?1000", config.entry.main];
         config.devtool = 'source-map';
     }
     return config;
