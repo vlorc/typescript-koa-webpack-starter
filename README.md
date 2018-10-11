@@ -7,6 +7,7 @@ Typescript koa minimum project
 + Merge
 + Debug
 + Hot Reload
++ Test
 
 ### Quick Start
 
@@ -14,6 +15,12 @@ Typescript koa minimum project
 
 ```shell
 npm start
+```
+
+* test
+
+```shell
+npm test
 ```
 
 * develop
