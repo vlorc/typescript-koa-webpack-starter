@@ -7,6 +7,7 @@ const BabiliWebpackPlugin = require('babili-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const NodeExternals = require('webpack-node-externals');
 const StartServerPlugin = require('start-server-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 let config = {
     entry: {
@@ -65,6 +66,10 @@ module.exports = function(env, argv) {
             }),
             new CleanWebpackPlugin(['./dist']),
             new BabiliWebpackPlugin(),
+            new BundleAnalyzerPlugin({
+                analyzerMode: 'static',
+                openAnalyzer: false,
+            }),
         );
     } else {
         config.plugins.push(
