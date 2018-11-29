@@ -3,6 +3,7 @@
 Typescript koa minimum project
 
 # Features
++ Webpack4
 + Compress
 + Merge
 + Debug
